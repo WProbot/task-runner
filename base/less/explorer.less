@@ -1,0 +1,142 @@
+ // main: style.less
+ #wdtr-library-container{
+    display:flex;
+    flex-wrap: wrap;
+ }
+.wdtr-library-item{
+    display:flex;
+    flex-direction: column;
+    padding:20px;
+    margin:5px;
+    background:#fff;
+    width:200px;
+    border:1px solid #BBB;
+    box-shadow: 2px 2px 15px rgba(0,0,0,.1);
+}
+.wdtr-library-item h2{
+    margin: 5px;
+}
+.wdtr-library-version{
+    color:#f50000;
+}
+.wdtr-library-description{
+    flex-grow:1;
+}
+.wdtr-library-action{
+    font-size:16px;
+    padding:15px;
+    margin-top:10px;
+    width:100%;
+    box-shadow: none;
+    border:0px;
+    background:#ff450f;
+    color:#eee;
+}
+.wdtr-library-action:hover{
+    background:#ff150f;
+    color:#fff;
+}
+.wdtr-library-actions{
+    display:flex;
+    background:#ccc;
+    margin-left:-20px;
+    margin-bottom:20px;
+    width:~"calc(100% + 20px)";
+    .wdtr-library-title{
+        display:flex;
+        flex-grow: 1;
+        font-size:20px;
+        justify-items: center;
+        padding: 20px 20px;
+    }
+    button{
+        padding:20px;
+        background:#ccc;
+        border:0px;
+        border-left:1px solid #aaa;
+        outline:none;
+        color:#222;
+        &:hover{
+            background:#AAA;
+            color:#000;
+        }
+        &.ready{
+            background:#ff450f;
+            color:#eee;
+            &:hover{
+                background:#ff150f;
+                color:#fff;
+            }  
+        }
+        &.black{
+            background:#999;
+            color:#eee;
+            &:hover{
+                background:#555;
+                color:#fff;
+            }    
+        }  
+    }
+}
+
+#wdtr-submit-tasker-upload-form {
+    display: flex;
+    align-items: stretch;
+    padding: 0px 0px 0px 10px;
+    background: #DDD;
+    #wdtr-tasker-upload-files{
+        padding:16px;
+    }
+    #wdtr-submit-tasker-upload {
+        flex-grow: 1;
+        border:none;
+        outline:none;
+        background:#ff450f;
+        color:#eee;
+        padding:16px;
+        margin: 0px;
+        &:hover{
+            background:#ff150f;
+            color:#fff;
+        }  
+    }
+}
+
+#wdtr-create-new-name{
+    margin:0px;
+    background:#DDD;
+    border:none;
+    outline:0px;
+    &:focus{
+        border:none !important;
+        outline:none !important;
+        box-shadow:none !important;
+        background:#eee;
+    } 
+}
+
+.wdtr-library-action-bar{
+    display:flex;
+    margin-top:10px;
+    button{
+        background:#555;
+        padding:20px;
+        color:#eee;
+        border:0px;
+        outline:none;
+        flex-grow:1;
+        &:hover{
+            background:#333;
+            color:#fff;
+        }
+        &.wdtr-library-action-run{
+            width:70%;
+            background:#ff450f;
+            color:#eee;
+            &:hover{
+                background:#ff150f;
+                color:#fff;
+            }   
+        }
+    }
+}

@@ -1,0 +1,1 @@
+Version 1 - This file is used to check if child theme is installed by your Web Disrupt assistant.

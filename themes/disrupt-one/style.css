@@ -1,0 +1,19 @@
+/* 
+Theme Name:		 Disrupt Theme
+Theme URI:		 https://webdisrupt.com
+Description:	 A simple bare-bones theme created by your Web Disrupt Assistant.
+Author:			   Web Disrupt
+Author URI:		 https://webdisrupt.com
+Version:		   1.0.0
+Text Domain:	 disrupt-one
+-------------------------------------------------------------- */
+body {
+  margin: 0px;
+}
+/* Overrides */
+/* Makes Elementor Buttons disregard transpareny - Your Welcome :) */
+.elementor-button:focus,
+.elementor-button:hover,
+.elementor-button:visited {
+  opacity: 1 !important;
+}

@@ -1,0 +1,47 @@
+---
+Name: Web Disrupt Core Installation
+Version: 1.0.0
+Description: Installs the webdisrupt base plugins, theme, and configurations.
+---
+# Install Custom Web Disrupt Theme
+theme install-local [plugin-dir]task-runner/themes/disrupt-one disrupt-one
+theme activate disrupt-one
+# Install Ideal Plugins
+plugin install elementor/elementor.php
+plugin activate elementor/elementor.php
+plugin install web-disrupt-funnelmentals/web-disrupt-funnelmentals.php
+plugin activate web-disrupt-funnelmentals/web-disrupt-funnelmentals.php
+plugin install web-disrupt-elementor-extended-template-library/web-disrupt-elementor-library-unlimited.php 
+plugin activate web-disrupt-elementor-extended-template-library/web-disrupt-elementor-library-unlimited.php
+plugin install wordpress-seo/wp-seo.php
+plugin activate wordpress-seo/wp-seo.php
+# Install Ecommerce Plugins
+plugin install woocommerce/woocommerce.php
+plugin activate woocommerce/woocommerce.php
+plugin install woocommerce-gateway-stripe/woocommerce-gateway-stripe.php
+plugin activate woocommerce-gateway-stripe/woocommerce-gateway-stripe.php
+# Set the ideal Caching options
+settings set-option siteground_optimizer_supercacher_permissions 1
+settings set-option siteground_optimizer_ssl_enabled 1
+settings set-option siteground_optimizer_remove_query_strings 1
+settings set-option siteground_optimizer_phpcompat_status 1
+settings set-option siteground_optimizer_phpcompat_progress 100
+settings set-option siteground_optimizer_optimize_javascript_async 1
+settings set-option siteground_optimizer_optimize_javascript 1
+settings set-option siteground_optimizer_optimize_images 1
+settings set-option siteground_optimizer_optimize_html 1
+settings set-option siteground_optimizer_optimize_css 1
+settings set-option siteground_optimizer_lazyload_thumbnails 1
+settings set-option siteground_optimizer_lazyload_responsive 1
+settings set-option siteground_optimizer_lazyload_images 1
+settings set-option siteground_optimizer_lazyload_gravatars 1
+settings set-option siteground_optimizer_image_optimization_status 1
+settings set-option siteground_optimizer_image_optimization_completed 1
+settings set-option siteground_optimizer_fix_insecure_content 1
+settings set-option siteground_optimizer_first_run 1
+settings set-option siteground_optimizer_enable_memcached 1
+settings set-option siteground_optimizer_enable_gzip_compression 1
+settings set-option siteground_optimizer_enable_cache 1
+settings set-option siteground_optimizer_enable_browser_caching 1
+settings set-option siteground_optimizer_disable_emojis 1
+settings set-option siteground_optimizer_autoflush_cache  1

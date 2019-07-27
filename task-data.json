@@ -1,0 +1,44 @@
+[
+    {
+        "type" : "plugin",
+        "name" : "Elementor",
+        "desc" : "Elementor is one of the fastest and easiest page builders.",
+        "slug" : "elementor",
+        "file" : "elementor.php"
+    },
+    {
+        "type" : "plugin",
+        "name" : "Funnelmentals",
+        "desc" : "Adds powerful funnel features to Elementor.",
+        "slug" : "web-disrupt-funnelmentals",
+        "file" : "web-disrupt-funnelmentals.php"
+    },
+    {
+        "type" : "plugin",
+        "name" : "Elementor Library Unlimited",
+        "desc" : "A constantly updating Elementor template library.",
+        "slug" : "web-disrupt-elementor-extended-template-library",
+        "file" : "web-disrupt-elementor-library-unlimited.php"
+    },
+    {
+        "type" : "plugin",
+        "name" : "Yoast SEO",
+        "desc" : "Optimize for search engine results.",
+        "slug" : "wordpress-seo",
+        "file" : "wp-seo.php"
+    },
+    {
+        "type" : "plugin",
+        "name" : "WooCommerce",
+        "desc" : "For selling ecommerce products.",
+        "slug" : "woocommerce",
+        "file" : "woocommerce.php"
+    },
+    {
+        "type" : "plugin",
+        "name" : "WC Stripe Checkout",
+        "desc" : "Best non-disruptive checkout process.",
+        "slug" : "woocommerce-gateway-stripe",
+        "file" : "woocommerce-gateway-stripe.php"
+    } 
+]

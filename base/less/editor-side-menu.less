@@ -1,0 +1,61 @@
+ // main: style.less
+
+ #wdtr-editor-side-menu{
+    padding: 10px 0px;
+    color:#fff;
+    width:300px;
+    background:#222;
+    .wdtr-editor-side-menu-header{
+        padding:20px;
+        font-size:20px;
+        background:#292929;
+    }
+    .wdtr-btn{
+        text-align:left;
+        font-size:20px;
+        padding:10px 20px;
+        width:100%;
+        box-shadow: none;
+        border:none;
+        border-bottom:solid 1px #111;
+        background:rgba(0,0,0,0);
+        color:#999;
+    }
+    .wdtr-btn:hover{
+        background:#1F1F1F;
+        color:#fff;
+    }
+}
+
+#wdtr-editor-task-builder-menu{
+    display:flex;
+    flex-direction: column;
+    label, select {
+        padding:5px 15px;
+    }
+    input{
+        width:100%;
+        background:#333;
+        color:#bbb;
+        border: 1px solid #777;
+        border-radius:3px;
+    }
+    .select2-container, #wdtr-fire-task-builder, #wdtr-load-custom-properties {
+        margin: 5px 15px;
+    }
+    .wdtr-desc{
+        color:#ccc;
+        padding:5px;
+    }
+    button{
+        outline:none;
+        border:none;
+        padding:20px;
+        background:#ff450f;
+        color:#eee;
+        &:hover{
+            background:#ff150f;
+            color:#fff;
+        }
+    }
+}

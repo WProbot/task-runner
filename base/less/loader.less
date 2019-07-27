@@ -1,0 +1,45 @@
+ // main: style.less
+
+ #wdtr-console-loader{
+    width: 16px;
+    height: 16px;
+    display:inline-block;
+    padding:0px;
+    transform:rotate(90deg);
+    -webkit-transform:rotate(90deg);
+    .circle {
+        fill: transparent;
+        stroke: #ff5500;
+        stroke-width:15px;
+        -webkit-animation: 1.5s circle infinite ease-in;
+        animation: 1.5s circle infinite ease-in;
+    }
+
+    @keyframes circle {
+    0% {
+        stroke-dasharray:0 400;
+        stroke-dashoffset: 0;
+    }
+    25%{
+        stroke-dashoffset: 0;
+    }
+    100% {
+        stroke-dasharray:400 400;
+        stroke-dashoffset: -400;
+    }
+    }
+
+    @-webkit-keyframes circle {
+    0% {
+        stroke-dasharray:0 400;
+        stroke-dashoffset: 0;
+    }
+    25%{
+        stroke-dashoffset: 0;
+    }
+    100% {
+        stroke-dasharray:400 400;
+        stroke-dashoffset: -400;
+    }
+    }
+}

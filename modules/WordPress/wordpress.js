@@ -77,3 +77,23 @@ WDTasker.modules.addTaskBuilderProperty('theme_dest',
     description : "Input the final theme folder name."
 }
 );
+
+// Add option key to the database
+WDTasker.modules.addTaskBuilderProperty('option_key',
+{ 
+    label : "Option Key",
+    type : "input",
+    placeholder : "database_key",
+    description : "Database key value."    
+}
+);
+
+// Add Value to database
+WDTasker.modules.addTaskBuilderProperty('option_value',
+{ 
+    label : "Option Value",
+    type : "input",
+    placeholder : "Some value",
+    description : "Assigns a new value to database key, make sure that it is the same type."
+}
+);

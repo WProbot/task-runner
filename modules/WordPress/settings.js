@@ -3,14 +3,14 @@
 *   https://webdisrupt.com
 */
 
-WDTasker.registerModule("settings", ["set-option"]);
+WDTasker.registerModule("settings", ["setOption"]);
 WDTasker.modules.settings = {};
 
 // Change WordPress settings option
-WDTasker.modules.settings.set_option = {};
-WDTasker.modules.settings.set_option.run = function(options){
+WDTasker.modules.settings.setOption = {};
+WDTasker.modules.settings.setOption.run = function(options){
     WDTasker.modules.wordpress._fireGenericAction('task_runner_wordpress_setting_set_option', options);
 }
-WDTasker.modules.settings.set_option.get = function(){
+WDTasker.modules.settings.setOption.get = function(){
     return ['option_key', 'option_value'];
 }

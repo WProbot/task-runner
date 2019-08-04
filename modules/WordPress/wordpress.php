@@ -101,7 +101,6 @@ class modules_WordPress{
     if(isset($_POST['options'][1])){ // Install theme local
       $themeSrc = $this->filter_directory_keywords($_POST['options'][0]);
       $themeDest = get_theme_root()."/".$_POST['options'][1];
-      //echo $themeSrc . " -> " . $themeDest;
       editor::copy_recursive($themeSrc, $themeDest);
       echo "Theme ". end(explode("/", $themeDest))." installed successfully.";
     } else { // Install theme

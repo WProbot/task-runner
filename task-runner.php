@@ -138,23 +138,28 @@ class Core {
 
 		if('task-runner' != $hook && 'toplevel_page_'.self::$plugin_data['slug'] != $hook) { return; }
 
-		// Ace Editor configuration
-		wp_enqueue_script( "web-disrupt-version-of-ace-editor", self::$plugin_data['this-root'] .'base/ace-editor/ace.js');
-		wp_enqueue_script( "web-disrupt-version-of-ace-editor-tomorrow-night", self::$plugin_data['this-root'] .'base/ace-editor/ace-tomorrow-night.js', ["web-disrupt-version-of-ace-editor"]);
-		wp_enqueue_style( "web-disrupt-version-of-ace-editor-tomorrow-night-styles", self::$plugin_data['this-root'] .'base/ace-editor/ace-tomorrow-night.css');
+		// Core Components
+		foreach( glob( self::$plugin_data['this-dir'] . 'base/components/*.js' ) as $file ) {
+			wp_enqueue_script( $file, str_replace(self::$plugin_data['this-dir'], self::$plugin_data['this-root'], $file), ['web-disrupt-task-runner-base']);
+		}
+
+		// Extension Modules (Actions)
+		foreach( glob( self::$plugin_data['this-dir'] . 'modules/*/*.js' ) as $file ) {
+			wp_enqueue_script( $file, str_replace(self::$plugin_data['this-dir'], self::$plugin_data['this-root'], $file), ['web-disrupt-task-runner-base']);
+		}
 
 		// Tasker Core system files
 		wp_enqueue_style( "web-disrupt-task-runner-base-styles", self::$plugin_data['this-root'] .'base/tasker-base.css');
 		wp_enqueue_script( "web-disrupt-task-runner-base", self::$plugin_data['this-root'] .'base/tasker-base.js');
 
-		// Select-2
-		wp_enqueue_style( "web-disrupt-select-2-styles", self::$plugin_data['this-root'] .'base/select-2/select-2.min.css');
-		wp_enqueue_script( "web-disrupt-select-2-js", self::$plugin_data['this-root'] .'base/select-2/select-2.min.js');
+		// Ace Editor configuration
+		wp_enqueue_script( "web-disrupt-version-of-ace-editor", self::$plugin_data['this-root'] .'base/3pl/ace-editor/ace.js');
+		wp_enqueue_script( "web-disrupt-version-of-ace-editor-tomorrow-night", self::$plugin_data['this-root'] .'base/3pl/ace-editor/ace-tomorrow-night.js', ["web-disrupt-version-of-ace-editor"]);
+		wp_enqueue_style( "web-disrupt-version-of-ace-editor-tomorrow-night-styles", self::$plugin_data['this-root'] .'base/3pl/ace-editor/ace-tomorrow-night.css');
 
-		// Built-in Modules (Actions)
-		foreach( glob( self::$plugin_data['this-dir'] . 'modules/*/*.js' ) as $file ) {
-            wp_enqueue_script( $file, str_replace(self::$plugin_data['this-dir'], self::$plugin_data['this-root'], $file), ['web-disrupt-task-runner-base']);
-		}
+		// Select-2
+		wp_enqueue_style( "web-disrupt-select-2-styles", self::$plugin_data['this-root'] .'base/3pl/select-2/select-2.min.css');
+		wp_enqueue_script( "web-disrupt-select-2-js", self::$plugin_data['this-root'] .'base/3pl/select-2/select-2.min.js');
 
 	}
 

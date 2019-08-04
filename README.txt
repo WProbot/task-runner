@@ -19,12 +19,14 @@ an impressive job.
 * Save, export, import, create and delete your scripts.
 * Task builder for easy inserting of new commands.
 * Syntax Highlighting so you know your commands are right.
-* Web Disrupt core installation provided as a script, more to come.
+* Web Disrupt core installation provided as a script, more to come...
 
 = What Commands are available =
 * Install, activate, and delete a local or remote WordPress theme.
 * Install, activate, delete, and deactivate WordPress plugins.
 * Add or update global options in Wordpress settings.
+* If, and, or, else, and elseif have been added for the formation of conditionals
+* isSSL which checks if the current url is https or http
  
 = In the works =
 * Upgrading WordPress, its themes, and plugins
@@ -44,7 +46,7 @@ create, update, and maintain their own Wordpress website.
 As I add more features, there are way to help contribute to this product. I have created a public
 git repo and will be managing changes from this centeralized location. Please feel free to help me 
 build out more integrations with thirdparty plugins, themes, and other cool features.
-[Githib Repo](https://github.com)
+[Githib Repo](https://github.com/WebDisrupt/task-runner)
 
 ###More Information:
 Get more information and view the documentation at:

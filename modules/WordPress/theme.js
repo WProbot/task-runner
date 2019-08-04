@@ -16,11 +16,11 @@ WDTasker.modules.theme.install.get = function(){
 }
 
 // Install Locally Stored WordPress Theme
-WDTasker.modules.theme.install_local = {};
-WDTasker.modules.theme.install_local.run = function(options){
+WDTasker.modules.theme.installLocal = {};
+WDTasker.modules.theme.installLocal.run = function(options){
 WDTasker.modules.wordpress._fireGenericAction('task_runner_wordpress_install_theme', options);
 }
-WDTasker.modules.theme.install_local.get = function(){
+WDTasker.modules.theme.installLocal.get = function(){
     return ['folder_src', 'theme_dest'];
 }
 

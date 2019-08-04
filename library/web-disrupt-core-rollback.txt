@@ -1,0 +1,46 @@
+---
+Name: Web Disrupt Core Rollback
+Version: 1.0.0
+Description: Removes the webdisrupt base plugins, theme, and configurations.
+---
+# Install Custom Web Disrupt Theme
+theme delete disrupt-one
+# Install Ideal Plugins
+plugin deactivate elementor/elementor.php
+plugin delete elementor/elementor.php
+plugin deactivate web-disrupt-funnelmentals/web-disrupt-funnelmentals.php
+plugin delete web-disrupt-funnelmentals/web-disrupt-funnelmentals.php
+plugin deactivate web-disrupt-elementor-extended-template-library/web-disrupt-elementor-library-unlimited.php 
+plugin delete web-disrupt-elementor-extended-template-library/web-disrupt-elementor-library-unlimited.php
+plugin deactivate wordpress-seo/wp-seo.php
+plugin delete wordpress-seo/wp-seo.php
+# Install Ecommerce Plugins
+plugin deactivate woocommerce/woocommerce.php
+plugin delete woocommerce/woocommerce.php
+plugin deactivate woocommerce-gateway-stripe/woocommerce-gateway-stripe.php
+plugin delete woocommerce-gateway-stripe/woocommerce-gateway-stripe.php
+# Set the ideal Caching options
+settings setOption siteground_optimizer_supercacher_permissions 0
+settings setOption siteground_optimizer_remove_query_strings 0
+settings setOption siteground_optimizer_phpcompat_status 0
+settings setOption siteground_optimizer_phpcompat_progress 0
+settings setOption siteground_optimizer_optimize_javascript_async 0
+settings setOption siteground_optimizer_optimize_javascript 0
+settings setOption siteground_optimizer_optimize_images 0
+settings setOption siteground_optimizer_optimize_html 0
+settings setOption siteground_optimizer_optimize_css 0
+settings setOption siteground_optimizer_lazyload_thumbnails 0
+settings setOption siteground_optimizer_lazyload_responsive 0
+settings setOption siteground_optimizer_lazyload_images 0
+settings setOption siteground_optimizer_lazyload_gravatars 0
+settings setOption siteground_optimizer_image_optimization_status 0
+settings setOption siteground_optimizer_image_optimization_completed 0
+settings setOption siteground_optimizer_fix_insecure_content 0
+settings setOption siteground_optimizer_first_run 0
+settings setOption siteground_optimizer_enable_memcached 0
+settings setOption siteground_optimizer_enable_gzip_compression 0
+settings setOption siteground_optimizer_enable_cache 0
+settings setOption siteground_optimizer_enable_browser_caching 0
+settings setOption siteground_optimizer_disable_emojis 0
+settings setOption siteground_optimizer_autoflush_cache  0
+settings setOption siteground_optimizer_ssl_enabled 0

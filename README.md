@@ -1,4 +1,4 @@
-# task-runner
+# WordPress Task Runner #
 Automate Everrything in WordPress!
 
 # Description #

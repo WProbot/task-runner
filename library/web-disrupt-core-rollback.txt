@@ -3,9 +3,9 @@ Name: Web Disrupt Core Rollback
 Version: 1.0.0
 Description: Removes the webdisrupt base plugins, theme, and configurations.
 ---
-# Install Custom Web Disrupt Theme
+# Remove Custom Web Disrupt Theme
 theme delete disrupt-one
-# Install Ideal Plugins
+# Remove Ideal Plugins
 plugin deactivate elementor/elementor.php
 plugin delete elementor/elementor.php
 plugin deactivate web-disrupt-funnelmentals/web-disrupt-funnelmentals.php
@@ -14,12 +14,12 @@ plugin deactivate web-disrupt-elementor-extended-template-library/web-disrupt-el
 plugin delete web-disrupt-elementor-extended-template-library/web-disrupt-elementor-library-unlimited.php
 plugin deactivate wordpress-seo/wp-seo.php
 plugin delete wordpress-seo/wp-seo.php
-# Install Ecommerce Plugins
+# Remove Ecommerce Plugins
 plugin deactivate woocommerce/woocommerce.php
 plugin delete woocommerce/woocommerce.php
 plugin deactivate woocommerce-gateway-stripe/woocommerce-gateway-stripe.php
 plugin delete woocommerce-gateway-stripe/woocommerce-gateway-stripe.php
-# Set the ideal Caching options
+# Remove the ideal Caching options
 settings setOption siteground_optimizer_supercacher_permissions 0
 settings setOption siteground_optimizer_remove_query_strings 0
 settings setOption siteground_optimizer_phpcompat_status 0

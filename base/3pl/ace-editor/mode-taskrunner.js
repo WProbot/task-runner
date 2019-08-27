@@ -59,17 +59,23 @@ ace.define("ace/mode/doc_comment_highlight_rules",["require","exports","module",
     var taskrunnerHighlightRules = function(options) {
         var keywordMapper = this.createKeywordMapper({
             "variable.language":
-                "isSSL",
+                WDTasker.logicEngine.conditionFuntions(),
             "keyword":
                 "if|else|elseif|endif",
             "storage.type":
-                "const|let|var|function",
+                "var",
             "constant.language":
-                "log|error",
+                "null",
             "support.function":
-                WDTasker.getModuleHighlightedText(),
-            "constant.language.boolean": "true|false"
+                "null",
+            "task.modules":
+                "null",
+            "task.actions":
+                'null',
+            "constant.language.boolean":
+                "true|false"
         }, "identifier");
+
         var kwBeforeRe = "case|do|else|finally|in|instanceof|return|throw|try|typeof|yield|void";
     
         var escapedRe = "\\\\(?:x[0-9a-fA-F]{2}|" + // hex
@@ -93,26 +99,22 @@ ace.define("ace/mode/doc_comment_highlight_rules",["require","exports","module",
                     regex : '"(?=.)',
                     next  : "qqstring"
                 }, {
+                    token : "task.modules",
+                    regex : '(?:'+WDTasker.getActionHighlightedText()+')'
+                }, {
                     token : "constant.numeric", // hexadecimal, octal and binary
                     regex : /0(?:[xX][0-9a-fA-F]+|[oO][0-7]+|[bB][01]+)\b/
                 }, {
                     token : "constant.numeric", // decimal integers and floats
                     regex : /(?:\d\d*(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+\b)?/
-                }, {
+                },
+                {
                     token : [
-                        "storage.type", "punctuation.operator", "support.function",
-                        "punctuation.operator", "entity.name.function", "text","keyword.operator"
+                        "storage.type"
                     ],
-                    regex : "(" + identifierRe + ")(\\.)(prototype)(\\.)(" + identifierRe +")(\\s*)(=)",
-                    next: "function_arguments"
-                }, {
-                    token : [
-                        "storage.type", "punctuation.operator", "entity.name.function", "text",
-                        "keyword.operator", "text", "storage.type", "text", "paren.lparen"
-                    ],
-                    regex : "(" + identifierRe + ")(\\.)(" + identifierRe +")(\\s*)(=)(\\s*)(function)(\\s*)(\\()",
-                    next: "function_arguments"
-                }, {
+                    next: 'function_arguments'
+                },
+                {
                     token : [
                         "entity.name.function", "text", "keyword.operator", "text", "storage.type",
                         "text", "paren.lparen"
@@ -150,10 +152,6 @@ ace.define("ace/mode/doc_comment_highlight_rules",["require","exports","module",
                     token : "keyword",
                     regex : "from(?=\\s*('|\"))"
                 }, {
-                    token : "keyword",
-                    regex : "(?:" + kwBeforeRe + ")\\b",
-                    next : "start"
-                }, {
                     token : ["support.constant"],
                     regex : /that\b/
                 }, {
@@ -172,7 +170,7 @@ ace.define("ace/mode/doc_comment_highlight_rules",["require","exports","module",
                     next  : "start"
                 }, {
                     token : "keyword.operator",
-                    regex : /--|\+\+|\.{3}|===|==|=|!=|!==|<+=?|>+=?|!|&&|\|\||\?:|[!$%&*+\-~\/^]=?/,
+                    regex : /--|\+\+|===|==|=|!=|!==|<+=?|>+=?|!|&&|\?:|[!$%&*+]=?/,
                     next  : "start"
                 }, {
                     token : "punctuation.operator",
@@ -287,10 +285,17 @@ ace.define("ace/mode/doc_comment_highlight_rules",["require","exports","module",
                     defaultToken: "string.regexp.charachterclass"
                 }
             ],
-            "function_arguments": [
+            "task_actions":[
                 {
+                   token: "task.actions",
+                   next: "function_arguments" 
+                }
+            ],
+            "function_arguments": [
+              /*  {
                     token: "variable.parameter",
                     regex: identifierRe
+                    //regex: /\w+/
                 }, {
                     token: "punctuation.operator",
                     regex: "[, ]+"
@@ -299,9 +304,13 @@ ace.define("ace/mode/doc_comment_highlight_rules",["require","exports","module",
                     regex: "$"
                 }, {
                     token: "empty",
-                    regex: "",
+                    regex: '',
                     next: "no_regex"
-                }
+                },
+                {
+                    token: "movenext",
+                    regex: 
+                }*/
             ],
             "qqstring" : [
                 {

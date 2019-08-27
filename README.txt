@@ -7,10 +7,11 @@ License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 == Description ==
-I have created a task runner for WordPress that can be used to automate tasks. This is a
-powerful plugin that bring its own brand or CLI inside of your admin dashboard.
+I have created a task runner for WordPress that can be used to automate tasks to one click. This is a
+powerful plugin that allows the full control of WordPress from an easy intuitive scripting language.
+All available inside your WordPress admin area.
 
-Currently this plugin is in an unofficial beta mode, but It is rather stable and does
+Currently this plugin is in an unofficial beta mode, but it is rather stable and does
 an impressive job.
 
 = What will this plugin do for you? =
@@ -23,23 +24,26 @@ an impressive job.
 
 = What Commands are available =
 * Install, activate, and delete a local or remote WordPress theme.
-* Install, activate, delete, and deactivate WordPress plugins.
-* Add or update global options in Wordpress settings.
-* If, and, or, else, and elseif have been added for the formation of conditionals
-* isSSL which checks if the current url is https or http
+* Install, activate, deactivate, and delete WordPress plugins.
+* Add or update options in Wordpress settings.
+* If, and, or, else, and elseif have been added for the formation of conditional statements.
+* isSSL which checks if the current url is https or http.
+* Variables to save data and curly brace binding to reuse the {{variables}}.
+* Create and update WordPress posts.
+* Console commands to print out important information to the user.
  
 = In the works =
 * Upgrading WordPress, its themes, and plugins
 * More Thirdparty Plugin Integrations 
 * WooCommerce Add product and configure settings
-* Some One-click site templated buildouts.
+* Some One-click site buildouts.
 * One-click sales Funnel build outs via Elementor Unlimited library
 * Checking, alerting, and fixing security vulnerabilities
 * Automation trigger to run scripts.
 
  = Mission =
 I have created this plugin to help me facilitate the standardization of WordPress
-tweaks, buildouts, and settings into one click. To make it easy for business owners to
+tweaking, building, best practices, and settings into one click. To make it easy for business owners to
 create, update, and maintain their own Wordpress website.
 
  = This plugin needs you =

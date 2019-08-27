@@ -2,6 +2,7 @@
 var WDTasker = {};
 WDTasker.modules = {};
 WDTasker.modulesList = [];
+WDTasker.modulePlusActionList = [];
 WDTasker.taskBuilderProperties = [];
 WDTasker.moduleActionList = {};
 
@@ -18,18 +19,38 @@ WDTasker.getModules = function(){
 
 // Get modules names only
 WDTasker.getModuleHighlightedText = function(){
-    let highlightedList = "";
-    let highlightedArray = WDTasker.modulesList;
-    let highlightedTotal = highlightedArray.length;
-    // Loop through actions and add to the modules array 
-    for (let i = 0; i < highlightedTotal; i++) {
-        highlightedArray = jQuery.merge(highlightedArray, WDTasker.moduleActionList[highlightedArray[i]]);
+    let moduleNameList = "";
+    for (let i = 0; i < WDTasker.modulesList.length; i++) {
+        moduleNameList += WDTasker.modulesList[i];
+        if(i != (WDTasker.modulesList.length - 1)) { moduleNameList += "|"; }
     }
-    for (let i = 0; i < highlightedArray.length; i++) {
-        highlightedList += highlightedArray[i];
-        if(i != (highlightedArray.length - 1)) { highlightedList += "|"; }
-    }
-    return highlightedList;
+    return moduleNameList;
+ }
+
+// Get action names only
+WDTasker.getActionHighlightedText = function(){
+        let highlightedList = "";
+        let highlightedArray = [];
+        let highlightedTotal = WDTasker.modulesList.length;
+        // Loop through actions and add to the modules array 
+        for (let i = 0; i < highlightedTotal; i++) {
+           if(typeof WDTasker.moduleActionList[WDTasker.modulesList[i]] !== 'undefined'){
+            let actionsList = WDTasker.moduleActionList[WDTasker.modulesList[i]];
+            for (let x = 0; x < actionsList.length; x++) {
+                highlightedArray.push(WDTasker.modulesList[i] + " " + actionsList[x]);      
+            }
+           }
+        }
+        highlightedArray = highlightedArray.sort(function(a, b) {
+            return b.length - a.length ||
+                   b.localeCompare(a);  
+        });
+        WDTasker.modulePlusActionList = highlightedArray;
+        for (let i = 0; i < highlightedArray.length; i++) {
+            highlightedList += highlightedArray[i];
+            if(i != (highlightedArray.length - 1)) { highlightedList += "|"; }
+        }
+        return highlightedList;      
  }
 
 // Get modules names only
@@ -78,13 +99,8 @@ WDTasker.setTasks = function(tasks){
     // Remove extra spaces around a task
     if(WDTasker.tasks.length > 1){
         for (let i = 0; i < WDTasker.tasks.length; i++) {
-            if(WDTasker.tasks[i].substring(0,2) == "\t"){ 
-                // If in block
-                WDTasker.tasks[i] = WDTasker.tasks[i].trimEnd(); 
-            } else { 
-                // if not in block
-                WDTasker.tasks[i] = WDTasker.tasks[i].trim();                
-            }
+            // if not in block
+            WDTasker.tasks[i] = WDTasker.tasks[i].trim();
         }
     }
 
@@ -143,13 +159,42 @@ WDTasker.runTask = function(){
             return;
         } 
 
-        // *** #2 => if conditional statement or conditional block active
-        if(thisTask.substring(0, 2) === "if"  || thisTask.substring(0, 7) === "else if"){
+        // *** #2 Replace variables with value    
+        let variables = Object.keys(WDTasker.taskVar.data);
+        for (let i = 0; i < variables.length; i++) {  
+            let regEx = new RegExp('{{'+variables[i]+'}}', 'g')         
+            thisTask = thisTask.replace(regEx, WDTasker.taskVar.data[variables[i]]);
+        }
+        // *** #3 Check if variables assigned
+        if(thisTask.substring(0, 4) == "var "){
+            thisTask = thisTask.replace("var ", "");
+            let thisValue = thisTask.substring(thisTask.indexOf('=')+1).trim();
+            if(thisValue.substring(0, 1) === '"' || thisValue.substring(0, 1) === "'" || thisValue.substring(0, 1) === '`'){
+                thisValue = thisValue.substring(1, thisValue.length-1).trim();
+            }
+            let thisKey = thisTask.substring(thisTask.indexOf('=')-1, 0).replace( "=", "").trim();
+            WDTasker.taskVar.current.setValue(thisKey, thisValue);
+            // If module and function don't exist then you can skip to next task because var value has been assigned
+            isNotFunction = true;
+            for (let i = 0; i < WDTasker.modulePlusActionList.length; i++) {
+                if(thisValue.indexOf(WDTasker.modulePlusActionList[i]) != -1){
+                    isNotFunction = false;
+                } 
+            }
+            // Only fire if not a function
+            if(isNotFunction){
+                WDTasker.nextTask();
+                return;
+            }
+            thisTask = thisValue.trim(); // Remove variable assignment and proceed with nomal task operations
+        }
+
+        // *** #4 => if conditional statement or conditional block active
+        if(thisTask.substring(0, 2) === "if" || thisTask.substring(0, 7) === "else if"){
 
             // Reset conditionals
             let inConditionalExecuteBlock = false;
             WDTasker.logicEngine.inConditionalSkipBlock = false;
-
             conditions = thisTask.replace("if ", "").replace("else if ", "").replace("else ", "");
             conditions = conditions.split("or");
             for(i=0; i < conditions.length; i++){  // Loop through OR opperator - only one set must be true
@@ -175,9 +220,10 @@ WDTasker.runTask = function(){
             }
             WDTasker.nextTask();
             return;
+            
         }
 
-        // *** #4 => endif which ends all
+        // *** #5 => check else block
         if (thisTask.substring(0, 4) === "else"){
             let isTrue = false;
             // Loop through existing conditionals and make sure there arent any true statements
@@ -196,7 +242,7 @@ WDTasker.runTask = function(){
             return;
         }
 
-        // *** #5 => endif which ends all
+        // *** #6 => endif which ends all
         if(thisTask.substring(0, 5) === "endif"){
             WDTasker.logicEngine.inConditionalSkipBlock = false;
             WDTasker.logicEngine.conditionalTracker = [];
@@ -210,7 +256,7 @@ WDTasker.runTask = function(){
             return;
         }
 
-        // *** #6 => execution block and Run Task as normal as long as coditional skip is false
+        // *** #8 => execution block and Run Task as normal as long as coditional skip is false
         if (WDTasker.logicEngine.inConditionalSkipBlock == false){
             WDTasker.executeTask(thisTask);
             return;
@@ -222,25 +268,29 @@ WDTasker.runTask = function(){
 WDTasker.executeTask = function(thisTask){
 
     thisTask = thisTask.split(" ");
-    let moduleName = thisTask[0].replace(/-/g, "_");
-    let moduleAction = thisTask[1].replace(/-/g, "_");
+    let moduleName = thisTask[0];
+    let moduleAction = thisTask[1];
     let moduleProperties = [];
     for (let x = 2; x < thisTask.length; x++) { // loop through properties
         let prop = "";
-        if(thisTask[x].indexOf('"') != -1){ // Check for Strings
-            prop += thisTask[x]+" ";
-            let foundStringEnd = false;
-            for (let y = x+1; y < thisTask.length; y++) { // loop and concat any strings
-                if(!foundStringEnd){ prop += thisTask[y] + " "; }
-                if(!foundStringEnd && thisTask[y].indexOf('"') != -1){
-                    foundStringEnd = true;
-                    x = y;
-                }
-            }
-            prop = prop.replace( /"/g, "").trim();
+
+        // Check for string building options
+        if(WDTasker.helpers.filterCheckString(thisTask[x], '"')){
+            let propObject = WDTasker.helpers.filterBuildString(thisTask, x, '"');
+            prop = propObject.prop;
+            x = propObject.newIndex;
+        } else if (WDTasker.helpers.filterCheckString(thisTask[x], "'")){
+            let propObject = WDTasker.helpers.filterBuildString(thisTask, x, "'");
+            prop = propObject.prop;
+            x = propObject.newIndex;
+        } else if (WDTasker.helpers.filterCheckString(thisTask[x], '`')){
+            let propObject = WDTasker.helpers.filterBuildString(thisTask, x, '`');
+            prop = propObject.prop;
+            x = propObject.newIndex;
         } else { // If not a string
-            prop += thisTask[x];
+            prop = thisTask[x];
         }
+
         moduleProperties.push(prop);   
     }
 

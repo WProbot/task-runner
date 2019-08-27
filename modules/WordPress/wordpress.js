@@ -5,33 +5,6 @@
 
 WDTasker.modules.wordpress = {};
 
-// Natively like a user opens iframe and manipulates WordPress as a user would
-WDTasker.modules.wordpress._fireIframeAction = function(actionName, logSuccess, options){
-    var thisLog = WDTasker.console.loading();
-    jQuery.post(ajaxurl, { action : actionName, options: options}, function(data) {
-        console.log(data);
-        var iFrameObj = document.createElement('IFRAME');
-        jQuery(iFrameObj).css("display", "none");
-        iFrameObj.id = "wdtr-modules-wordpress";
-        iFrameObj.src = data;
-        jQuery('body').append(iFrameObj);
-        jQuery(iFrameObj).load( function () {
-            jQuery("#wdtr-modules-wordpress").replaceWith("");
-            WDTasker.console.replace(thisLog, logSuccess);
-            WDTasker.nextTask(); 
-        });
-    });
-}
-
-// Fire Generic Action that display custom console text and perfoms action faster
-WDTasker.modules.wordpress._fireGenericAction = function(actionName, options){
-    var thisLog = WDTasker.console.loading();
-    jQuery.post(ajaxurl, { action : actionName, options: options}, function(data) {
-        WDTasker.console.replace(thisLog, data);
-        WDTasker.nextTask(); 
-    });
-}
-
 /*** Add Wordpress Task Builder Options ***/
 // Add Plugin ID to Properties List
 WDTasker.modules.addTaskBuilderProperty('plugin_id',
@@ -87,6 +60,15 @@ WDTasker.modules.addTaskBuilderProperty('option_key',
 WDTasker.modules.addTaskBuilderProperty('option_value',
 { 
     label : "Option Value",
+    type : "input",
+    placeholder : "Some value",
+    description : "Assigns a new value to database key, make sure that it is the same type."
+});
+
+// Add Value to database
+WDTasker.modules.addTaskBuilderProperty('post_id',
+{ 
+    label : "id",
     type : "input",
     placeholder : "Some value",
     description : "Assigns a new value to database key, make sure that it is the same type."

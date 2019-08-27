@@ -87,7 +87,8 @@ WDTasker.editor.drawLibrary = function(filter){
             WDTasker.runTasks();        
         });    
         jQuery(".wdtr-library-action-edit").click(function(){ // Edit
-            jQuery("#wdtr-editor-modal-container").show();
+            jQuery("#wdtr-editor-modal-container, #wdtr-editor-window, #wdtr-editor-view-console").show();
+            jQuery(".wdtr-console-window, #wdtr-editor-view-editor").hide();
             WDTasker.editor.instance.setValue(jQuery(this).parent().parent().attr('data-tasks').replace(/\\"/g, '"'));
             WDTasker.editor.instance.clearSelection(); 
         });  

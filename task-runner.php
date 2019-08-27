@@ -86,7 +86,7 @@ class Core {
             "version"         => "1.0.0",
             "author"          => "Web Disrupt",
             "description"     => "Powerful task automator that can be used to make repeatable tasks and build processes inside WordPress.",
-            "logo"            => plugins_url( 'assets/images/logo.png', __FILE__ ),
+            "logo"            => plugins_url( 'images/task-runner-logo.svg', __FILE__ ),
 			"style"           => plugins_url( 'templates/style.css', __FILE__  ),
 			"images"          => plugins_url( 'assets/images/', __FILE__ ),
 			"resources"       => plugins_url( 'assets/resources/', __FILE__ ),
@@ -123,7 +123,7 @@ class Core {
 	 */
 	public function init_admin_menu_and_page() {
 
-		$icon_url = plugins_url('../images/icon.png', __FILE__);
+		$icon_url = plugins_url('images/task-runner-icon.svg', __FILE__);
 		add_menu_page(self::$plugin_data['name'], self::$plugin_data['name'], 'administrator', self::$plugin_data['slug'], array($this, 'init_admin_page'), $icon_url);
 	
 	}
@@ -138,6 +138,10 @@ class Core {
 
 		if('task-runner' != $hook && 'toplevel_page_'.self::$plugin_data['slug'] != $hook) { return; }
 
+		// Tasker Core system files
+		wp_enqueue_style( "web-disrupt-task-runner-base-styles", self::$plugin_data['this-root'] .'base/tasker-base.css');
+		wp_enqueue_script( "web-disrupt-task-runner-base", self::$plugin_data['this-root'] .'base/tasker-base.js');
+
 		// Core Components
 		foreach( glob( self::$plugin_data['this-dir'] . 'base/components/*.js' ) as $file ) {
 			wp_enqueue_script( $file, str_replace(self::$plugin_data['this-dir'], self::$plugin_data['this-root'], $file), ['web-disrupt-task-runner-base']);
@@ -148,14 +152,11 @@ class Core {
 			wp_enqueue_script( $file, str_replace(self::$plugin_data['this-dir'], self::$plugin_data['this-root'], $file), ['web-disrupt-task-runner-base']);
 		}
 
-		// Tasker Core system files
-		wp_enqueue_style( "web-disrupt-task-runner-base-styles", self::$plugin_data['this-root'] .'base/tasker-base.css');
-		wp_enqueue_script( "web-disrupt-task-runner-base", self::$plugin_data['this-root'] .'base/tasker-base.js');
-
 		// Ace Editor configuration
 		wp_enqueue_script( "web-disrupt-version-of-ace-editor", self::$plugin_data['this-root'] .'base/3pl/ace-editor/ace.js');
 		wp_enqueue_script( "web-disrupt-version-of-ace-editor-tomorrow-night", self::$plugin_data['this-root'] .'base/3pl/ace-editor/ace-tomorrow-night.js', ["web-disrupt-version-of-ace-editor"]);
 		wp_enqueue_style( "web-disrupt-version-of-ace-editor-tomorrow-night-styles", self::$plugin_data['this-root'] .'base/3pl/ace-editor/ace-tomorrow-night.css');
+		//wp_enqueue_script( "web-disrupt-version-of-ace-editor-ext-language-tools", self::$plugin_data['this-root'] .'base/3pl/ace-editor/ext-language-tools.js');
 
 		// Select-2
 		wp_enqueue_style( "web-disrupt-select-2-styles", self::$plugin_data['this-root'] .'base/3pl/select-2/select-2.min.css');

@@ -46,8 +46,6 @@ WDTasker.modules.console.error.get = function(){
     return ['console_log_message'];
 }
 
-
-
 // Add message to the log
 WDTasker.modules.addTaskBuilderProperty('console_log_message',
 { 

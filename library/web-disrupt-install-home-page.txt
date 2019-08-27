@@ -1,0 +1,9 @@
+---
+Name: Web Disrupt Install Home Page
+Version: 1.0.0
+Description: Installs the webdisrupt base plugins, theme, and configurations.
+---
+var pageTitle = "Homepage"
+# Install Custom Web Disrupt Theme
+var homepageId = post create "post" {{pageTitle}} " " "publish"
+console log "PostID = {{homepageId}}"

@@ -14,7 +14,7 @@ if(isset($_FILES['tasker_uploads'])){ Web_Disrupt_Task_Runner\editor::import_all
 ?>
 
 <div class="wdtr-library-actions">
-    <div class="wdtr-library-title"> Task Runner Library </div>
+    <div class="wdtr-library-title"> <img src="<?php echo $logo; ?>" /> Task Runner Library </div>
     <button id="wdtr-create-new" class="wdtr-btn"> Create </button>
     <input  id="wdtr-create-new-name" style="display:none" type="text" placeholder="Name" /> 
     <button  id="wdtr-create-new-cancel" style="display:none" class="wdtr-btn black"> X </button> 
@@ -89,7 +89,7 @@ jQuery('document').ready(function($){
     theme : "ace/theme/tomorrow_night",
     wrapBehavioursEnabled: true,
     indentedSoftWrap: false, 
-    behavioursEnabled: false, 
+    behavioursEnabled: false,
     highlightActiveLine: true
     });
     editor.getSession().setUseWrapMode(true);

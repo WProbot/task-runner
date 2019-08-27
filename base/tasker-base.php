@@ -1,7 +1,7 @@
 <?php
 namespace Web_Disrupt_Task_Runner;
 
-class editor {
+class base {
 
     /**
      * Main Constructor that sets up all static data associated with this plugin.
@@ -147,4 +147,4 @@ class editor {
 
 }
 
-new editor();
+new base();

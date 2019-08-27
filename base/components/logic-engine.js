@@ -8,6 +8,7 @@ WDTasker.logicEngine = {};
 /* logical variables that control tasker logical conditions */
 WDTasker.logicEngine.inConditionalSkipBlock = false;
 WDTasker.logicEngine.conditionalTracker = [];
+WDTasker.logicEngine.conditionFuntions = function(){ return "isSSL"; } // delimited by !
 WDTasker.logicEngine.evaluate = function(condition){
     switch(condition){
         case "true":

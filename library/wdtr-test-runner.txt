@@ -1,0 +1,20 @@
+---
+Name: WDTR Test Runner
+Version: 1.0.0
+Description: What is the end result of this task.
+The Key to an awesome site is ythe fact that nybody can change he world. It is onlt possible to change it if you have the power.
+---
+
+# Test Variables
+var prefix = "Multiple Variables"
+var postfix = " test"
+console log "{{prefix}} {{postfix}}"
+
+# Setup by Setting Option
+settings setOption WDTR_TEST_option false
+# TEST Get Option from DB
+var getOption = settings getOption WDTR_TEST_option
+console log "Return statement from function : {{getOption}}"
+# TEST Set Option return variable
+var setOption = settings setOption WDTR_TEST_option true
+console log "Return statement from function : {{setOption}}"

@@ -3,7 +3,7 @@
 *   https://webdisrupt.com
 */
 
-WDTasker.registerModule("plugin", ["install", "activate", "deactivate", "delete"]);
+WDTasker.registerModule("plugin", ["install", "activate", "status", "deactivate", "delete"]);
 WDTasker.modules.plugin = {};
 
 // Install WordPress Plugin
@@ -21,6 +21,15 @@ WDTasker.modules.plugin.activate.run = function(options){
     WDTasker.modules.base.ajaxCallIframe('task_runner_wordpress_activate_plugin', "Plugin "+options[0]+" activated successfully.", options);    
 }
 WDTasker.modules.plugin.activate.get = function(){
+    return ['plugin_id'];
+}
+
+// Display All WordPress Plugin status
+WDTasker.modules.plugin.status = {};
+WDTasker.modules.plugin.status.run = function(options){
+    WDTasker.modules.base.ajaxCall('task_runner_wordpress_plugin_status', options);    
+}
+WDTasker.modules.plugin.status.get = function(){
     return ['plugin_id'];
 }
 

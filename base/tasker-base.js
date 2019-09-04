@@ -78,7 +78,7 @@ WDTasker.setTasks = function(tasks){
 
     WDTasker.tasksSource = tasks.trim().split("---");
     WDTasker.tasksHeader = ((WDTasker.tasksSource[1].split(":"))[1]).replace("Version", "").trim();
-    WDTasker.tasksSource = WDTasker.tasksSource[WDTasker.tasksSource.length - 1].trim();
+    WDTasker.tasksSource = tasks.replace("---"+WDTasker.tasksSource[1]+"---", "").trim();
     WDTasker.tasks = [];
     WDTasker.currentTask = 0;
     WDTasker.totalTasks = 0;
@@ -165,6 +165,7 @@ WDTasker.runTask = function(){
             let regEx = new RegExp('{{'+variables[i]+'}}', 'g')         
             thisTask = thisTask.replace(regEx, WDTasker.taskVar.data[variables[i]]);
         }
+
         // *** #3 Check if variables assigned
         if(thisTask.substring(0, 4) == "var "){
             thisTask = thisTask.replace("var ", "");
@@ -183,6 +184,7 @@ WDTasker.runTask = function(){
             }
             // Only fire if not a function
             if(isNotFunction){
+                WDTasker.taskVar.current.clearValue();
                 WDTasker.nextTask();
                 return;
             }
@@ -295,6 +297,8 @@ WDTasker.executeTask = function(thisTask){
     }
 
     /* Call module function which executes task */
-    WDTasker.modules[moduleName][moduleAction].run(moduleProperties);
+    if(moduleName.length && moduleAction.length){
+        WDTasker.modules[moduleName][moduleAction].run(moduleProperties);
+    }
 
 }

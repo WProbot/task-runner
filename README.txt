@@ -1,7 +1,7 @@
 === Task Runner ===
 Contributors: therealwebdisrupt
 Tags: easy, build, out, script, commands, better, cli, one-click, setup, install, activate, web disrupt
-Tested up to: 5.2.1
+Tested up to: 5.2.2
 Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -25,7 +25,7 @@ an impressive job.
 = What Commands are available =
 * Install, activate, and delete a local or remote WordPress theme.
 * Install, activate, deactivate, and delete WordPress plugins.
-* Add or update options in Wordpress settings.
+* Add or update options in Wordpress settings and post meta data.
 * If, and, or, else, and elseif have been added for the formation of conditional statements.
 * isSSL which checks if the current url is https or http.
 * Variables to save data and curly brace binding to reuse the {{variables}}.
@@ -43,18 +43,20 @@ an impressive job.
 
  = Mission =
 I have created this plugin to help me facilitate the standardization of WordPress
-tweaking, building, best practices, and settings into one click. To make it easy for business owners to
+tweaking, building, best practices, and settings. To make it easy for agencies/business owners to
 create, update, and maintain their own Wordpress website.
 
  = This plugin needs you =
 As I add more features, there are way to help contribute to this product. I have created a public
 git repo and will be managing changes from this centeralized location. Please feel free to help me 
 build out more integrations with thirdparty plugins, themes, and other cool features.
-[Githib Repo](https://github.com/WebDisrupt/task-runner)
+[Github Repo](https://github.com/WebDisrupt/task-runner)
 
 ###More Information:
 Get more information and view the documentation at:
-[webdisrupt.com](https://webdisrupt.com/task-runner).
+[webdisrupt.com Documentation](https://webdisrupt.com/task-runner)
+[Get Involved with the Github Repo](https://github.com/WebDisrupt/task-runner)
+[Become a Disruptor](https://webdisrupt.com/)
 
 == Installation ==
 1. Upload **"task-runner.zip"** to the **"/wp-content/plugins/"** directory.

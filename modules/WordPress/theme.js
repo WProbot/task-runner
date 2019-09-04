@@ -3,7 +3,7 @@
 *   https://webdisrupt.com
 */
 
-WDTasker.registerModule("theme", ["install", "installLocal", "activate", "delete"]);
+WDTasker.registerModule("theme", ["install", "installLocal", "activate", "delete", "current"]);
 WDTasker.modules.theme = {};
 
 // Install WordPress Theme
@@ -40,4 +40,13 @@ WDTasker.modules.theme.delete.run = function(options){
 }
 WDTasker.modules.theme.delete.get = function(){
     return ['theme_id'];
+}
+
+// Get Current WordPress Theme
+WDTasker.modules.theme.current = {};
+WDTasker.modules.theme.current.run = function(options){
+    WDTasker.modules.base.ajaxCall('task_runner_wordpress_get_current_theme', options);    
+}
+WDTasker.modules.theme.current.get = function(){
+    return [];
 }

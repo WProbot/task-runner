@@ -46,7 +46,7 @@ class base {
      */
     public function save_tasker(){         
         ob_start();
-            file_put_contents ( Core::$plugin_data["save-dir"]."/".$_POST['data']['name'].".txt", $_POST['data']['file']);
+            file_put_contents ( Core::$plugin_data["save-dir"]."/".sanitize_file_name($_POST['data']['name']).".txt", sanitize_file_name($_POST['data']['file']));
         ob_flush();
         wp_die();
     }
@@ -58,7 +58,7 @@ class base {
      * @return string
      */
     public function delete_tasker(){    
-        unlink( Core::$plugin_data["save-dir"]."/".$_POST['name'].".txt" );
+        unlink( Core::$plugin_data["save-dir"]."/".sanitize_file_name($_POST['name']).".txt" );
         wp_die();
     }
 
@@ -89,26 +89,30 @@ class base {
      * @return string
      */
     public static function import_all_tasker(){
-
-        $uploadfiles = $_FILES['tasker_uploads'];
-        if (is_array($uploadfiles)) {
-            foreach ($uploadfiles['name'] as $key => $value) {
-                $name = $uploadfiles['name'][$key];
-                $tmp = $uploadfiles['tmp_name'][$key];
-                $finalFolder = Core::$plugin_data["save-dir"] . "/" . basename($name);
-                if (strpos($finalFolder, '.zip') !== false) {
-                    move_uploaded_file($tmp, $finalFolder);
-                    $zip = new \ZipArchive;
-                    if ($zip->open($finalFolder) === TRUE) {
-                        $zip->extractTo(Core::$plugin_data["save-dir"] . "/");
-                        $zip->close();
+        if (current_user_can('upload_files')){
+            // We are only allowing images
+            $fileInfo = wp_check_filetype(basename($_FILES['tasker_uploads']), array('txt' => 'text/plain','zip' => 'application/zip'));
+            if(!empty($fileInfo['type'])){
+                $uploadfiles = $_FILES['tasker_uploads'];
+                if (is_array($uploadfiles)) {
+                    foreach ($uploadfiles['name'] as $key => $value) {
+                        $name = $uploadfiles['name'][$key];
+                        $tmp = $uploadfiles['tmp_name'][$key];
+                        $finalFolder = Core::$plugin_data["save-dir"] . "/" . basename($name);
+                        if (strpos($finalFolder, '.zip') !== false) {
+                            move_uploaded_file($tmp, $finalFolder);
+                            $zip = new \ZipArchive;
+                            if ($zip->open($finalFolder) === TRUE) {
+                                $zip->extractTo(Core::$plugin_data["save-dir"] . "/");
+                                $zip->close();
+                            }
+                            unlink($finalFolder);
+                        }
+                        elseif(strpos($finalFolder, '.txt') !== false){
+                            move_uploaded_file($tmp, $finalFolder);
+                        }
                     }
-                    unlink($finalFolder);
                 }
-                elseif(strpos($finalFolder, '.txt') !== false){
-                    move_uploaded_file($tmp, $finalFolder);
-                }
-
             }
         }
     }

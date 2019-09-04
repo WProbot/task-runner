@@ -40,6 +40,11 @@ WDTasker.console.replace = function(guid, message){
     jQuery("#"+guid).html(message);
 }
 
+// Replace Log with new value
+WDTasker.console.delete = function(guid){
+    jQuery("#"+guid).replaceWith("");
+}
+
 // Write log based om type
 WDTasker.console.writeLog = function(logType, message){
     let guid = WDTasker.helpers.guid();

@@ -26,9 +26,16 @@ WDTasker.modules.base.ajaxCall = function(actionName, options){
     var thisLog = WDTasker.console.loading();
     jQuery.post(ajaxurl, { action : actionName, options: options}, function(data) {
         data = JSON.parse(data);
-        console.log(data);
-        WDTasker.console.replace(thisLog, data.message);
-        WDTasker.taskVar.current.setValue(WDTasker.taskVar.current.key, data.returnData);
+        // Print Message if exists otherwise delete current loader log
+        if(data.message.length > 0){
+            WDTasker.console.replace(thisLog, data.message);
+        } else {
+            WDTasker.console.delete(thisLog);
+        }
+        if(WDTasker.taskVar.current.key != ""){
+            WDTasker.taskVar.current.setValue(WDTasker.taskVar.current.key, data.returnData);
+            WDTasker.taskVar.current.clearValue();
+        }
         WDTasker.nextTask(); 
     });
 }
